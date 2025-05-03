@@ -1,7 +1,7 @@
 """This function handles the withdrawal process for the user."""
 
 # TODO: Pass in the checking_account and savings_account objects.
-def handle_withdrawal():
+def handle_withdrawal(checking, savings):
     """
     Handles the withdrawal of funds for checking and savings accounts.
 
@@ -20,13 +20,15 @@ def handle_withdrawal():
     print("Which account would you like to make a withdrawal?")
     # TODO: Prompt the user to select an account to make a withdrawal.
     # TODO: If the user chooses to quit, return from the function.
-    if:
+    choice = input("Enter 1 for checking, 2 for savings, q to quit: ")
+    if choice == "q":
         return
 
     try:
         # TODO: If the selection is in a list of valid choices, i.e ['1', '2']
-        if:
+        if choice in ["1", "2"]:
             try:
+                amount = float(input("How much would you like to withdraw? $"))
                 # TODO: Prompt the user to enter the amount to withdraw and convert it to a float.
 
             # Use the ValueError as an exception.
@@ -36,17 +38,25 @@ def handle_withdrawal():
                 # TODO: Call the handle_withdrawal function recursively for an invalid amount.
 
                 # TODO: Ensure the function returns after the recursive call.
+                print("Invalid amount. Please enter a valid number.")
+                handle_withdrawal(checking, savings)
+                return
 
             # TODO: Add an if/else conditional statement to check the account choice,
-            if:
+            if choice == "1":
+                checking.withdraw(amount)
+                print(f"Here is your checking balance: ${checking.get_balance():,.2f}")
                 # TODO: Call the withdraw method on the appropriate account.
                 # TODO: Add a print statement to display the updated balance after the deposit
                 # TODO: Format the balance to two decimal places and thousands.
             else:
+                savings.withdraw(amount)
+                print(f"Here is your savings balance: ${savings.get_balance():,.2f}")
                 # TODO: Call the deposit methods on the appropriate account.
                 # TODO: Add a print statement to display the updated balance after the deposit
                 # TODO: Format the balance to two decimal places and thousands.
         else:
+            raise ValueError("Invalid choice. Please enter 1, 2, or q.")
             # TODO: Raise a ValueError with a message stating the user entered an invalid choice.
     # If the user enters an invalid choice,
     # Print the ValueError message and call the handle_deposit function recursively.

@@ -1,7 +1,7 @@
 """This function handles the transfer process for the user."""
 
 # TODO: Pass in the checking_account and savings_account objects.
-def handle_transfer():
+def handle_transfer(checking, savings):
     """
     Handles the transfer of funds between checking and savings accounts.
 
@@ -20,27 +20,36 @@ def handle_transfer():
     print("Which account would you like to transfer from?")
     # TODO: Prompt the user to select an account to transfer from.
     # TODO: If the user chooses to quit, return from the function.
-    if:
+    choice = input("Enter 1 to transfer from checking to savings, 2 to transfer from savings to checking, q to quit: ")
+    if choice == "q":
         return
 
     try:
         # TODO: If the selection is in a list of valid choices, i.e ['1', '2']
-        if:
+        if choice in ["1", "2"]:
             try:
+                amount = float(input("How much would you like to transfer? $"))
                 # TODO: Prompt the user to enter the amount to transfer and convert it to a float.
             except ValueError:
                 # TODO: Print an error message if the user enters an invalid amount.
                 # TODO: Call the handle_transfer function recursively if the user enters an invalid amount.
+                print("Invalid amount. Please enter a valid number.")
+                handle_transfer(checking, savings)
                 return
 
             # TODO: Add an if/else conditional statement to check the account choice,
-            if:
+            if choice == "1":
+                checking.withdraw(amount)
+                savings.deposit(amount)
                 # TODO: Call the withdraw and deposit methods on the appropriate account.
             else:
+                savings.withdraw(amount)
+                checking.deposit(amount)
                 # TODO: Call the withdraw and deposit methods on the appropriate account.
             # After the transfer call the balances function with the accounts.
             balances(checking, savings)
         else:
+            raise ValueError("Invalid choice. Please enter 1, 2, or q.")
             # TODO: Raise a ValueError with a message stating the user entered an invalid choice.
     except ValueError as e:
         print(e)
